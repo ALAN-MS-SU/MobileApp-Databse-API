@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace Tables.Users
 {
@@ -22,7 +23,7 @@ namespace Tables.Users
 
         [Column("Password")]
         [Display(Name = "Password")]
-        [AllowNull]
+        [JsonIgnore]
         public string Password { get; set; } = Password;
 
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Procedures_and_Functions.Funcs
+namespace Procedures_and_Functions.Models
 {
     public class Login_User(string email, string password)
     {

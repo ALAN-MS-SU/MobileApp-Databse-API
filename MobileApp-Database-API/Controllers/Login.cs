@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Tables.Users;
 using DB;
+using Procedures_and_Functions.Models;
 using Procedures_and_Functions.Funcs;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -22,10 +23,11 @@ public class Login : ControllerBase
     }
 
     [HttpPost(Name = "Login")]
-    public object Post([FromBody] Login_User body)
+    public async Task<Token> Post([FromBody] Login_User body)
     {
-        Console.WriteLine("Email: {0} / Passsword: {1}", body.Email, body.Password);
-        object user = new UserList(DB).Get_User(body.Email, body.Password);
+
+        Token user = await new UserList(DB).Get_User(body.Email, body.Password);
         return user;
+
     }
 }

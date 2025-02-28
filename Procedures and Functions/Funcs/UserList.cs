@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DB;
 using Microsoft.EntityFrameworkCore;
+using Procedures_and_Functions.Models;
 namespace Procedures_and_Functions.Funcs
 {
     public class UserList
@@ -15,9 +16,9 @@ namespace Procedures_and_Functions.Funcs
         {
             this.DB = db;
         }
-        public object Get_User(string Email, string Passsword)
+        public async Task<Token> Get_User(string Email, string Passsword)
         {
-            object users = DB.Users.FromSqlRaw("SELECT * FROM get_user({0},{1})", Email, Passsword).AsNoTracking().Select(u => new {u.ID,u.Name,u.Email});
+            Token users = await DB.Users.FromSqlRaw("SELECT * FROM get_user({0},{1})", Email, Passsword).AsNoTracking().Select(user => new Token(user.ID, user.Name, user.Email)).FirstOrDefaultAsync();
             return users;
         }
     }
