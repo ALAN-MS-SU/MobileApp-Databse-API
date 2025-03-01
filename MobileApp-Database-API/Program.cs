@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using DB;
-
+using JWT.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +18,7 @@ builder.Services.AddCors(options =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<Context>();
+builder.Services.AddTransient<JWTGenerator>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

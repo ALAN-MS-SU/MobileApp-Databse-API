@@ -1,33 +1,39 @@
 using Microsoft.AspNetCore.Mvc;
-using Tables.Users;
 using DB;
 using Procedures_and_Functions.Models;
 using Procedures_and_Functions.Funcs;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-
+using JWT.Models;
 namespace MobileApp_Database_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class Login : ControllerBase
 {
-    private Context DB;
+    private readonly Context DB;
+
+    private readonly IConfiguration Configuration;
 
     private readonly ILogger<Login> _logger;
 
-    public Login(ILogger<Login> logger, Context db)
+    public Login(ILogger<Login> logger, Context db, IConfiguration configuration)
     {
         this.DB = db;
         _logger = logger;
+        Configuration = configuration;
     }
 
     [HttpPost(Name = "Login")]
-    public async Task<Token> Post([FromBody] Login_User body)
+    public async Task<string> Post([FromBody] Login_User body)
     {
 
-        Token user = await new UserList(DB).Get_User(body.Email, body.Password);
-        return user;
+        string key = Configuration["JWTKey"] ?? "";
+        if (String.IsNullOrEmpty(key))
+        {
+            throw new Exception("JWTKey not found");
+        }
+        Token user = await new UserList(DB, key).Get_User(body.Email, body.Password);
+        string JWT = JWTGenerator.CreateJWT(user, key);
+        return JWT;
 
     }
 }

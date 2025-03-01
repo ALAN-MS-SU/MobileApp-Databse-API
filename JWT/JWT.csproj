@@ -2,15 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <RootNamespace>Procedures_and_Functions</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DB\DB.csproj" />
-    <ProjectReference Include="..\JWT\JWT.csproj" />
-    <ProjectReference Include="..\Tables\Tables.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Procedures_and_Functions.Models
+﻿namespace JWT.Models
 {
     public class Token(int id, string name, string email)
     {
@@ -7,6 +7,7 @@
         public string Name { get; set; } = name;
 
         public string Email { get; set; } = email;
+
     }
-    
+
 }
