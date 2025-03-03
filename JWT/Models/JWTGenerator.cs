@@ -5,7 +5,7 @@ namespace JWT.Models
 {
     public class JWTGenerator
     {
-        public static string CreateJWT(Token token,string key)
+        public static string CreateJWT(Token token, string key)
         {
             JwtSecurityTokenHandler handler = new();
 
@@ -19,6 +19,7 @@ namespace JWT.Models
             {
                 SigningCredentials = credentials,
                 Expires = DateTime.Now.AddHours(4),
+                NotBefore = DateTime.Now,
                 Subject = CreateClaims(token)
             };
             JwtSecurityToken JWT = handler.CreateJwtSecurityToken(descriptor);

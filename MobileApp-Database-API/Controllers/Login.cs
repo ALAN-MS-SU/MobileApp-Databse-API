@@ -25,7 +25,7 @@ public class Login : ControllerBase
     [HttpPost(Name = "Login")]
     public async Task<string> Post([FromBody] Login_User body)
     {
-
+        Console.WriteLine(DateTime.Now.ToString("dd/MM/yyyy | HH:mm:ss"));
         string key = Configuration["JWTKey"] ?? "";
         if (String.IsNullOrEmpty(key))
         {
